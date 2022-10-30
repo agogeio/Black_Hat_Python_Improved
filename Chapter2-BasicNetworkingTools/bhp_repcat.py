@@ -1,4 +1,5 @@
-#FOUND ON PAGE 13 of BHP
+# FOUND ON PAGE 13 of BHP
+# There has been significant changes to this netcat repacement as compaired to the BHP book
 
 import argparse     # https://docs.python.org/3.10/library/argparse.html?highlight=argparse
 import os           # https://docs.python.org/3.10/library/os.html
