@@ -1,7 +1,7 @@
 # FOUND ON PAGE 19 of BHP
 
 import sys
-import socket 
+import socket
 import threading
 
 HEX_FILTER = ''.join([(len(repr(chr(i))) == 3) and chr(i) or '.' for i in range(256)]) # SRC - https://code.activestate.com/recipes/142812/
@@ -51,5 +51,6 @@ def request_handler(buffer):
 
 def response_handler(buffer):
     return buffer
+
 
 hex_dump("This is informtion that we will convert to HEX A")
