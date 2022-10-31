@@ -28,7 +28,7 @@ class RepCat:
         if not cmd:
             return
 
-        print(shlex.split(cmd))
+        # print(shlex.split(cmd))
         is_cd = cmd.split(' ')
         cmd_to_exec = is_cd[0]
 
