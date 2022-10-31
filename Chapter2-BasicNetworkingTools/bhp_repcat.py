@@ -6,8 +6,8 @@ import os           # https://docs.python.org/3.10/library/os.html
 import socket       # https://docs.python.org/3.10/library/socket.html?highlight=socket#module-socket
 import shlex        # https://docs.python.org/3.10/library/shlex.html?highlight=shlex
 import subprocess   # https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess
-import sys          # https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess
-import textwrap     # https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess
+import sys          # https://docs.python.org/3.10/library/sys.html?highlight=sys#module-sys
+import textwrap     # https://docs.python.org/3.10/library/textwrap.html?highlight=textwrap
 import threading    # https://docs.python.org/3.10/library/threading.html?highlight=threading#module-threading
 
 
