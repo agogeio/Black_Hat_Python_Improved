@@ -4,6 +4,8 @@ import sys
 import socket
 import threading
 
+#! HTTPS doesn't really work - python3 bhp_tcp_proxy.py 192.168.1.100 9000 docs.python.org 443 False
+
 HEX_FILTER = ''.join([(len(repr(chr(i))) == 3) and chr(i) or '.' for i in range(256)]) # SRC - https://code.activestate.com/recipes/142812/
 
 def hex_dump(src, length=16, show=True):
