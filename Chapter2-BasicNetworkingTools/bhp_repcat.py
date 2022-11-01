@@ -83,7 +83,7 @@ class RepCat:
                 recv_len = 1
                 response = ''
                 while recv_len:
-                    data = self.socket.recv(4096)
+                    data = self.socket.recv(4096) #* https://docs.python.org/3/library/socket.html#socket.socket.recv
                     recv_len = len(data)
                     response += data.decode()
                     if recv_len < 4096:
@@ -117,7 +117,7 @@ class RepCat:
             print(f'In upload {self.args.upload}')
             file_buffer = b''
             while True:
-                data = client_socket.recv(4096)
+                data = client_socket.recv(4096) #* https://docs.python.org/3/library/socket.html#socket.socket.recv
                 if data:
                     file_buffer += data
                 else:
@@ -137,7 +137,7 @@ class RepCat:
                     #! The send needed to be encoded
                     client_socket.send(prompt)
                     while '\n' not in cmd_buffer.decode():
-                        cmd_buffer += client_socket.recv(64)
+                        cmd_buffer += client_socket.recv(64) #* https://docs.python.org/3/library/socket.html#socket.socket.recv
                     response = self.execute(cmd_buffer.decode())
                     if response:
                         client_socket.send(response.encode())
