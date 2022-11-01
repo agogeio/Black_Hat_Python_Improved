@@ -139,3 +139,25 @@ if __name__ == '__main__':
     main()
 
 # hex_dump("This is informtion that we will convert to HEX A")
+
+# Validated the following errors in the BHP book's code
+
+# Traceback (most recent call last):
+#   File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+#     self.run()
+#   File "/usr/lib/python3.10/threading.py", line 953, in run
+#     self._target(*self._args, **self._kwargs)
+#   File "/home/saiello/Documents/agogeio/Black_Hat_Python_Improved/Chapter2-BasicNetworkingTools/bhp_tcp_proxy.py", line 59, in proxy_handler
+#     remote_socket.connect((remote_host, remote_port))
+# socket.gaierror: [Errno -2] Name or service not known
+
+
+# Exception in thread Thread-1 (proxy_handler):
+# Traceback (most recent call last):
+#   File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+#     self.run()
+#   File "/usr/lib/python3.10/threading.py", line 953, in run
+#     self._target(*self._args, **self._kwargs)
+#   File "/home/saiello/Downloads/Chapter02/proxy.py", line 55, in proxy_handler
+#     remote_socket.connect((remote_host, remote_port))
+# socket.gaierror: [Errno -2] Name or service not known
