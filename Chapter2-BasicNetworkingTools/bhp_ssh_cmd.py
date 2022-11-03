@@ -17,8 +17,8 @@ https://help.ubuntu.com/community/SSH
 https://help.ubuntu.com/community/SSH/OpenSSH/ConnectingTo
 """
 
-import paramiko 
 import getpass #* https://docs.python.org/3/library/getpass.html
+import paramiko 
 
 def ssh_command(ip, port, user, passwd, cmd):
     ssh_client = paramiko.SSHClient()
@@ -27,8 +27,8 @@ def ssh_command(ip, port, user, passwd, cmd):
     ssh_client.connect(ip, port=port, username=user, password=passwd)
 
     _, stdout, stderr = ssh_client.exec_command(cmd)
-    print(type(stdout)) #* This shows that the output is a file type and that's why we're using readlines()
-    print(type(stderr)) #* This shows that the output is a file type and that's why we're using readlines()
+    # print(type(stdout)) #* This shows that the output is a file type and that's why we're using readlines()
+    # print(type(stderr)) #* This shows that the output is a file type and that's why we're using readlines()
     #* https://docs.paramiko.org/en/stable/api/client.html#paramiko.client.SSHClient.exec_command (explain the tuple returned by exec_command)
     #* https://www.w3schools.com/python/python_tuples.asp - "Tuples are used to store multiple items in a single variable."
 
