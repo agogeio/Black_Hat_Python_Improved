@@ -34,6 +34,8 @@ def handle_client(client_socket):
         print(f"[*] Recieved: {request.decode('utf-8')}")
         sock.send(b'ACK')
     
+#* https://docs.python.org/3/library/__main__.html 
+#* Explain how the __name__ / __main__ situation works
 if __name__ == '__main__':
     main()
     
