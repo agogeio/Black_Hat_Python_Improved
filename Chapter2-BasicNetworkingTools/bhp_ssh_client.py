@@ -25,6 +25,8 @@ def ssh_command(ip, port, user, passwd, command):
                     ssh_client.close()
                     break
                 
+                #! Improve this for the cat command and changing dirs
+                #! take logic from the repcat code
                 cmd_output = subprocess.check_output(shlex.split(cmd), shell=True)
                 ssh_session.send(cmd_output or 'okay')
             except Exception as e:
@@ -33,7 +35,8 @@ def ssh_command(ip, port, user, passwd, command):
     return
 
 if __name__ == '__main__':
-    user = getpass.getuser()
+    # user = getpass.getuser()
+    user = input('Enter username: ')
     password = getpass.getpass()
 
     ip = input('Enter server IP: ')

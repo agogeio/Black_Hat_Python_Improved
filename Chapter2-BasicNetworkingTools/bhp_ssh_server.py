@@ -47,7 +47,7 @@ if __name__ == '__main__':
     except Exception as e:
         print(f'[-] Listen failed: ' + str(e))
     else:
-        print('[+] Got a connection from ',  client, address)
+        print('[+] Got a connection from ',  address)
 
 """
 With the above code the server will accept an SSH connection, 
