@@ -18,11 +18,15 @@ class Server (paramiko.ServerInterface):
     def check_channel_request(self, kind, chanid):
         if kind ==  'session':
             return paramiko.OPEN_SUCCEEDED
-        return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
+            #* https://docs.paramiko.org/en/stable/api/server.html 
+        return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED 
+        #* https://docs.paramiko.org/en/stable/api/server.html 
+        #* OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED is an error code
 
     def check_auth_password(self, username, password):
-        if (username == 'Steven') and (password == 'secret'):
+        if (username == 'user') and (password == 'secret'):
             return paramiko.AUTH_SUCCESSFUL
+            #* https://docs.paramiko.org/en/stable/api/server.html
 
 
 #* https://www.delftstack.com/howto/python/get-ip-address-python/
@@ -50,3 +54,32 @@ With the above code the server will accept an SSH connection,
 but the connection will be reset because it has nothing to do 
 with it
 """
+
+bhp_ssh_session =  paramiko.Transport(client)
+bhp_ssh_session.add_server_key(HOSTKEY)
+server = Server()
+bhp_ssh_session.start_server(server=server)
+
+chan = bhp_ssh_session.accept(20)
+if chan is None:
+    print('**** No Channel ****')
+    sys.exit(1)
+
+print('[+] Authenticated!')
+print(chan.recv(1024))
+chan.send("Welcome to the bhp_ssh_server")
+
+try:
+    while True:
+        command = input('Enter a command: ')
+        if command != 'exit':
+            chan.send(command)
+            rcv = chan.recv(8192)
+            print(rcv.decode())
+        else:
+            chan.send('exit')
+            print('Exiting')
+            bhp_ssh_session.close()
+            break
+except Exception as e:
+    bhp_ssh_session.close()
