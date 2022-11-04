@@ -10,23 +10,31 @@ def execute(cmd):
     cmd = cmd.strip()
     if not cmd:
         return
+    else:
+        print(f'Command recieved was: {cmd}')
 
-    # print(shlex.split(cmd))
-    is_cd = cmd.split(' ')
-    cmd_to_exec = is_cd[0]
+    x_cmd = ''
+    cmd_to_exec = shlex.split(cmd)
 
-    if cmd_to_exec == 'cd':
+    if len(cmd_to_exec) > 1:
+        x_cmd = cmd_to_exec[0]
+        x_attr = cmd_to_exec[1] 
+
+    if x_cmd == 'cd':
         print('Trying to cd')
-        cd_path = is_cd[1] or '/home/'
+
+        cd_path = x_attr or '/home/'
         os.chdir(cd_path)
+        cwd = os.getcwd() 
+        return f'Changed directory to: {cwd}'
         
-    if (cmd_to_exec == 'cat') or (cmd_to_exec == 'type'):
+    if (x_cmd == 'cat') or (x_cmd == 'type'):
         # https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess%20run#subprocess.run (below)
         # had to use different subprocess.run settings for the cat command
         cmd_result = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
 
         if cmd_result.returncode == 0:
-            return cmd_result.stdout + '\n'
+            return cmd_result.stdout
         else:
             return cmd_result.stderr + '\n'
 
