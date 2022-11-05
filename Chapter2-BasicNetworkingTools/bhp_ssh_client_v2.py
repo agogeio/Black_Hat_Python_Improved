@@ -69,7 +69,7 @@ def ssh_command(ip, port, user, passwd, command):
 
                 print(shlex.split(cmd))
                 process_data = execute(cmd)
-                print(process_data)
+                # print(process_data)
                 ssh_session.send(process_data)
             except Exception as e:
                 ssh_session.send(f'Error: {str(e)}')
