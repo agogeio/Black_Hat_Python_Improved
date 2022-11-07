@@ -1,0 +1,10 @@
+************************************************************************
+************************************************************************
+This is a text file with scape data for development testing.
+************************************************************************
+
+The recommended approach to invoking subprocesses is to use the run() 
+function for all use cases it can handle. For more advanced use cases, 
+the underlying Popen interface can be used directly.
+************************************************************************
+************************************************************************

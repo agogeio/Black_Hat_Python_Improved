@@ -1,3 +1,5 @@
 .gitignore
 **/*.key
 *.key
+scrap.py
+scrap.txt

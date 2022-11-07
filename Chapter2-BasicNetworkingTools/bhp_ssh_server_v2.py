@@ -55,7 +55,7 @@ but the connection will be reset because it has nothing to do
 with it
 """
 
-bhp_ssh_session =  paramiko.Transport(client)
+bhp_ssh_session =  paramiko.Transport(client) #* https://docs.paramiko.org/en/stable/api/transport.html The Transport() attaches to a socket stream
 bhp_ssh_session.add_server_key(HOSTKEY)
 server = Server()
 bhp_ssh_session.start_server(server=server)

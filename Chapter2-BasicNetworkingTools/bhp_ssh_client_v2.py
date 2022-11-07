@@ -52,7 +52,7 @@ def ssh_command(ip, port, user, passwd, command):
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh_client.connect(ip, port=port, username=user, password=passwd)
 
-    ssh_session = ssh_client.get_transport().open_session() # This is new from our last script
+    ssh_session = ssh_client.get_transport().open_session() # This is new from our last script #* https://docs.paramiko.org/en/stable/api/transport.html#paramiko.transport.Transport.open_session
     if ssh_session.active: 
         #* https://docs.paramiko.org/en/stable/api/channel.html?highlight=open_session.active#paramiko.channel.Channel.active
         #* https://docs.paramiko.org/en/stable/api/client.html?highlight=get_transport#paramiko.client.SSHClient.get_transport
