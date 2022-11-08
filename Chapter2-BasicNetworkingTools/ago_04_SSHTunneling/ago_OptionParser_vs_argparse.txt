@@ -1,0 +1,11 @@
+In the Paramiko rforward.py example the code uses Option Parser
+
+https://docs.python.org/3/library/optparse.html
+
+OptionParser has been "Deprecated since version 3.2: The optparse module is deprecated and will not be developed further; development will continue with the argparse module".
+
+
+https://docs.python.org/3/library/argparse.html#module-argparse
+
+
+The argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv. The argparse module also automatically generates help and usage messages. The module will also issue errors when users give the program invalid arguments.

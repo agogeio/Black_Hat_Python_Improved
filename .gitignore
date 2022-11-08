@@ -1,5 +1,6 @@
 .gitignore
-**/*.key
 *.key
+**/*.key
+**/*/*.key
 scrap.py
 scrap.txt

@@ -1,14 +1,22 @@
 # FOUND ON PAGE 13 of BHP
 # There has been significant changes to this netcat repacement as compaired to the BHP book
 
-import argparse     # https://docs.python.org/3.10/library/argparse.html?highlight=argparse
-import os           # https://docs.python.org/3.10/library/os.html
-import socket       # https://docs.python.org/3.10/library/socket.html?highlight=socket#module-socket
-import shlex        # https://docs.python.org/3.10/library/shlex.html?highlight=shlex
-import subprocess   # https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess
-import sys          # https://docs.python.org/3.10/library/sys.html?highlight=sys#module-sys
-import textwrap     # https://docs.python.org/3.10/library/textwrap.html?highlight=textwrap
-import threading    # https://docs.python.org/3.10/library/threading.html?highlight=threading#module-threading
+import argparse     
+# https://docs.python.org/3.10/library/argparse.html?highlight=argparse
+import os           
+# https://docs.python.org/3.10/library/os.html
+import socket       
+# https://docs.python.org/3.10/library/socket.html?highlight=socket#module-socket
+import shlex        
+# https://docs.python.org/3.10/library/shlex.html?highlight=shlex
+import subprocess   
+# https://docs.python.org/3.10/library/subprocess.html?highlight=subprocess
+import sys          
+# https://docs.python.org/3.10/library/sys.html?highlight=sys#module-sys
+import textwrap     
+# https://docs.python.org/3.10/library/textwrap.html?highlight=textwrap
+import threading    
+# https://docs.python.org/3.10/library/threading.html?highlight=threading#module-threading
 
 
 class RepCat:
@@ -19,7 +27,7 @@ class RepCat:
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         # SO_REUSEADDR = http://www.unixguide.net/network/socketfaq/4.11.shtml
         # SOL_SOCKET = https://www.gnu.org/software/libc/manual/html_node/Socket_002dLevel-Options.html
-            # The SOL_SOCKET link is a good explination for both options
+        # The SOL_SOCKET link is a good explination for both options
 
 
     #! This was a bug in the book, the book did not have the "self" argument first
