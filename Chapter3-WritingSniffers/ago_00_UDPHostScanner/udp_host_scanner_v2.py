@@ -9,7 +9,7 @@ import sys
 # HOST = '192.168.1.100' moving this into main
 class IP:
     def __init__(self, buff=None):
-        header = struct.unpack('<BBHHHBBH4s4s', buff) 
+        header = struct.unpack('<BBHHHBBH4s4s4s', buff) 
         # B = 1-byte unsigned char
         # H = 2-byte unsigned short
         # 4s = 4-byte string
@@ -27,9 +27,19 @@ class IP:
         self.sum = header[7]
         self.src = header[8]
         self.dst = header[9]
+        self.opt = header[10] # This was added after the code
+        #? added self.opt to the code which means we needed to process 4 more bytes, the string went from <BBHHHBBH4s4s to <BBHHHBBH4s4s4s (from 2x 4s to 3x 4s)
 
-        self.src_address = ipaddress.ip_address(self.src)
-        self.dst_address =  ipaddress.ip_address(self.dst)
+        # self.eth_length = 14
+        # self.iph_length = self.ihl * 4
+
+        # h_size = self.eth_length + self.iph_length
+
+        # print(f'Header length: {iph_length}')
+
+        # self.src_address = ipaddress.ip_address(self.src)
+        # self.dst_address =  ipaddress.ip_address(self.dst)
+        
 
         self.protocol_map = {1: "ICMP", 6: "TCP", 17: "UDP"}
 
@@ -60,20 +70,14 @@ def sniff(host):
 
     try:
         while True:
-            # print(sniffer.recvfrom(65565))
-
             #? Linux ICMP payload is: (!\”#\$%&\‘()*+,-./01234567)
             #? Windows ICMP payload is: abcdefghijklmnopqrstuvwabcdefghi
             #* http://blog.alan-kelly.ie/blog/payload_comparsion/
 
             raw_buffer = sniffer.recvfrom(65565)[0]
-            print(type(raw_buffer))
-            # str_buffer = raw_buffer.decode()
-            # print(str_buffer)
-            # hex = ago_Hex_Filter.hex_dump(raw_buffer)
-            # print(hex)
-            ip_header = IP(raw_buffer[0:20])
-            print(f'Protocol: {ip_header.protocol}\nsum: {ip_header.sum}\nsrc: {ip_header.src_address}\ndst: {ip_header.dst_address}\nlen: {ip_header.len}')
+            ago_Hex_Filter.hex_dump(src=raw_buffer)
+            ip_header = IP(raw_buffer[0:24])
+            print(f'Protocol: {ip_header.protocol}\nsum: {ip_header.sum}\nsrc: {ip_header.src_address}\ndst: {ip_header.dst_address}\nlen: {ip_header.len}\nOptions: {ip_header.opt}')
 
 
     except KeyboardInterrupt:
