@@ -3,12 +3,15 @@
 # Origional credit https://www.binarytides.com/python-packet-sniffer-code-linux/
 
 import ago_hex_filter
+from sys import platform
 import socket, sys
 from struct import *
 
 def eth_addr (a):
 		b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (ord(chr(a[0])) , ord(chr(a[1])) , ord(chr(a[2])), ord(chr(a[3])), ord(chr(a[4])) , ord(chr(a[5])))
 		return b
+
+print(platform)
 
 try:
 	s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
