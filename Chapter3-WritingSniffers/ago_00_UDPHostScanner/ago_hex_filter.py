@@ -17,11 +17,13 @@ def hex_dump(src, length=16, show=True):
         hexwidth = length*3
         results.append(f'{i:04x} {hexa:<{hexwidth}} {printable}')
     
-    if show:
-        for line in results:
-            print(line)
-        else:
-            return results
+    return results
+
+    # if show:
+    #     for line in results:
+    #         print(line)
+    #     else:
+    #         return results
 
 
 
