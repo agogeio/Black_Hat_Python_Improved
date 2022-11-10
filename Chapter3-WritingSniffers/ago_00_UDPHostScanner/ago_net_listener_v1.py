@@ -3,7 +3,7 @@
 # Origional credit https://www.binarytides.com/python-packet-sniffer-code-linux/
 
 import ago_hex_filter
-from sys import platform
+import platform
 import socket, sys
 from struct import *
 
@@ -11,16 +11,20 @@ def eth_addr (a):
 		b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (ord(chr(a[0])) , ord(chr(a[1])) , ord(chr(a[2])), ord(chr(a[3])), ord(chr(a[4])) , ord(chr(a[5])))
 		return b
 
-print(platform)
-
 try:
-	s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
+	if platform.system() == 'Linux':
+		sniffer = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
+	elif platform.system == "Windows":
+		sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
+		# print('Windows support coming soon')
+		# sys.exit(0)
+	
 except socket.error as msg:
 	print ('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
 	sys.exit()
 
 while True:
-		packet = s.recvfrom(65565)
+		packet = sniffer.recvfrom(65565)
 		packet = packet[0]
 		#parse ethernet header
 		eth_length = 14
