@@ -13,18 +13,17 @@ def eth_addr (a):
 
 try:
 	if platform.system() == 'Linux':
-		s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
-	elif platform.system == "Windows":
-		s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
-		print('Windows support coming soon')
-		sys.exit(0)
-	
-except socket.error as msg:
-	print ('Socket could not be created. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+		sniffer = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
+	elif platform.system() == "Windows":
+		sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
+		sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+
+except socket.error as e:
+	print (f'Socket could not be created. Error Code: {e}')
 	sys.exit()
 
 while True:
-		packet = s.recvfrom(65565)
+		packet = sniffer.recvfrom(65565)
 		packet = packet[0]
 		#parse ethernet header
 		eth_length = 14
@@ -33,8 +32,6 @@ while True:
 		eth = unpack('!6s6sH' , eth_header)
 		eth_protocol = socket.ntohs(eth[2])
 		print (f'ETH FRAME:\tSource MAC:\t{eth_addr(packet[6:12])}\tDestination MAC:\t{eth_addr(packet[0:6])}\tProtocol:\t{str(eth_protocol)}')
-
-		# print(eth_protocol)
 
 		#Parse IP packets, IP Protocol number = 8
 		if eth_protocol == 8:
@@ -53,8 +50,6 @@ while True:
 			d_addr = socket.inet_ntoa(ip_header[9]);
 			
 			print (f'IP PACKET:\tSource Address:\t{str(s_addr)}\t\tDestination Address:\t{str(d_addr)}\t\tProtocol:\t{str(ip_protocol)}\t\tVersion:\t\t{str(version)}\t\tIP Header Lth:\t{str(ihl)}\tTTL: {str(ttl)}\t')
-
-			# print(f'IP Protocol {ip_protocol}')
 
 			#TCP protocol
 			if ip_protocol == 6:
@@ -78,10 +73,6 @@ while True:
 				
 				#get data from the packet
 				data = packet[h_size:]
-
-				# hex_data = ago_hex_filter.hex_dump(data)
-				
-				# print (str(data))
 
 			#ICMP 
 			elif ip_protocol == 1 :
@@ -130,8 +121,4 @@ while True:
 				data = packet[h_size:]
 
 				udp_hex = ago_hex_filter.hex_dump(data)
-				print (f'UDP data:\n{udp_hex[0]}')
-
-
-		
-
+				print (f'UDP data:\n{udp_hex}')
