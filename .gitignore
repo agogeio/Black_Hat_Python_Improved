@@ -2,5 +2,8 @@
 *.key
 **/*.key
 **/*/*.key
+*.pcap
+**/*.pcap
+**/*/*.pcap
 scrap.py
 scrap.txt
