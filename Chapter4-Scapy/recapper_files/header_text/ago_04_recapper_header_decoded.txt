@@ -1,0 +1,95 @@
+xxxx
+GET / HTTP/1.1
+Host: localhost:5000
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Brave";v="107", "Chromium";v="107", "Not=A?Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+Sec-GPC: 1
+Accept-Language: en-GB,en
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+
+Content-Type not in header
+
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.7
+Date: Tue, 22 Nov 2022 23:33:09 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 225
+Connection: close
+
+xxxx
+POST / HTTP/1.1
+Host: localhost:5000
+Connection: keep-alive
+Content-Length: 119780
+Cache-Control: max-age=0
+sec-ch-ua: "Brave";v="107", "Chromium";v="107", "Not=A?Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+Origin: http://localhost:5000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarywDxfLaotbys8VFsq
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+Sec-GPC: 1
+Accept-Language: en-GB,en
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: http://localhost:5000/
+Accept-Encoding: gzip, deflate, br
+
+
+HTTP/1.1 302 FOUND
+Server: Werkzeug/2.2.2 Python/3.10.7
+Date: Tue, 22 Nov 2022 23:33:16 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 225
+Location: /uploads/Monkey.PNG
+Connection: close
+
+
+GET /uploads/Monkey.PNG HTTP/1.1
+Host: localhost:5000
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+Sec-GPC: 1
+Accept-Language: en-GB,en
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+sec-ch-ua: "Brave";v="107", "Chromium";v="107", "Not=A?Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Referer: http://localhost:5000/
+Accept-Encoding: gzip, deflate, br
+If-None-Match: "1669159960.2505755-119597-2748457067"
+If-Modified-Since: Tue, 22 Nov 2022 23:32:40 GMT
+
+Content-Type not in header
+
+HTTP/1.1 200 OK
+Server: Werkzeug/2.2.2 Python/3.10.7
+Date: Tue, 22 Nov 2022 23:33:16 GMT
+Content-Disposition: inline; filename=Monkey.PNG
+Content-Type: image/png
+Content-Length: 119597
+Last-Modified: Tue, 22 Nov 2022 23:33:16 GMT
+Cache-Control: no-cache
+ETag: "1669159996.5135138-119597-2748457067"
+Date: Tue, 22 Nov 2022 23:33:16 GMT
+Connection: close

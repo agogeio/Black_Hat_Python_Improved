@@ -6,18 +6,25 @@ import re       #* Regular Expressions - https://docs.python.org/3.10/library/re
 import sys
 import zlib     #* gzip compatable lib - https://docs.python.org/3.10/library/zlib.html?highlight=zlib#module-zlib
 
-OUTDIR = '/home/saiello/Pictures/agoge'
-PCAPS =  '/home/saiello/Downloads/agoge'
+OUTDIR = './Chapter4-Scapy/recapper_files/images/'
+PCAPS =  './Chapter4-Scapy/recapper_files/pcaps/'
 
 Response = namedtuple('Response', ['header', 'payload'])
 
-
 def get_header(payload):
     try:
+        
         header_raw = payload[:payload.index(b'\r\n\r\n')+2]
-        #? Figure out what this is
+        #? s.index(x[, i[, j]])
+        #? index of the first occurrence of x in s (at or after index i and before index j)
+        #* https://docs.python.org/3/library/stdtypes.html#common-sequence-operations
+        #* https://www.w3resource.com/python/python-bytes.php
+
+        # header_raw = payload[:payload.index(b'\r\n\r\n')-1]
+        # print(f'\nSTART HEADER:\n{header_raw.decode()}\nEND HEADER\n')
+        #? These are the HTML headers in the HTTP session
     except Exception as e:
-        sys.stdout.write('No Headers found\n')
+        sys.stdout.write('\nNo Headers found\n')
         sys.stdout.flush()
         return None
 
@@ -25,6 +32,8 @@ def get_header(payload):
     #* header_raw.decode()
     #* https://docs.python.org/3.10/library/stdtypes.html?highlight=decode#bytes.decode
     #* Return a string decoded from the given bytes. Default encoding is 'utf-8'.
+    #* https://docs.python.org/3.10/library/re.html?highlight=re#module-re
+    #? Both patterns and strings to be searched can be Unicode strings (str) as well as 8-bit strings (bytes).
 
     if 'Content-Type' not in header:
         return None
@@ -35,8 +44,8 @@ def extract_content(Response, content_name='image'):
     content, content_type = None, None
     if content_name in Response.header['Content-Type']:
         content_type = Response.header['Content-Type'].split('/')[1]
+        # print(f'\n{content_type}')
         content = Response.payload[Response.payload.index(b'\r\n\r\n')+4:]
-
     if 'Content-Encoding' in Response.header:
         if Response.header['Content-Encoding'] == 'gzip':
             content = zlib.decompress(Response.payload, zlib.MAX_WBITS | 32)
@@ -47,19 +56,43 @@ def extract_content(Response, content_name='image'):
 
 
 class Recapper:
-    def __init__(self, fname) -> None:
-        pass
+    def __init__(self, fname):
+        pcap = rdpcap(fname)
+        self.sessions = pcap.sessions()
+        self.responses = list()
 
     def get_responses(self):
-        pass
+        for session in self.sessions:
+            # print(f'\nSTART SESSION:\n{session}\nEND SESSION\n')
+            #? The above will print the 5 tuple session data
+            payload = b''
+            for packet in self.sessions[session]:
+                try:
+                    if packet[TCP].dport == 5000 or packet[TCP].sport == 5000:
+                        #! This needs to be the port that your capturing data that the web server runs on
+                        payload += bytes(packet[TCP].payload)
+                except IndexError:
+                    sys.stdout.write('x')
+                    sys.stdout.flush()
+
+            if payload:
+                header = get_header(payload)
+                if header is None:
+                    continue
+                self.responses.append(Response(header=header, payload=payload))
 
     def write(self, content_name):
-        pass
+        for i, response in enumerate(self.responses):
+            content, content_type = extract_content(response, content_name)
+            if content and content_type:
+                fname = os.path.join(OUTDIR, f'ex_{i}.{content_type}')
+                print(f'Writing {fname}')
+                with open(fname, 'wb') as f:
+                    f.write(content)
 
 
 if __name__ == '__main__':
-    pfile = os.path.join(PCAPS, 'agoge.pcap')
-    get_header(pfile)
-    # recapper = Recapper(pfile)
-    # recapper.get_responses()
-    # recapper.write('image')
+    pfile = os.path.join(PCAPS, 'get_monkey.pcap')
+    recapper = Recapper(pfile)
+    recapper.get_responses()
+    recapper.write('image')
