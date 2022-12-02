@@ -66,6 +66,7 @@ def gather_paths():
                 #!     print(path)
                 #!     web_paths.put(path)
 
+
 @contextlib.contextmanager
 def chdir(path):
     """
@@ -93,3 +94,24 @@ def chdir(path):
         os.chdir(this_dir)
 
 
+def test_remote():
+    while not web_paths.empty():
+        path = web_paths.get()
+        url = f'{TARGET}{path}'
+        print(url)
+        time.sleep(5)
+
+        response = requests.get(url=url)
+
+        if response.status_code == 200:
+            answers.put(url)
+            sys.stdout.write('+')
+        else:
+            sys.stdout.write('x')
+        sys.stdout.flush()
+
+
+
+def run():
+
+    pass
