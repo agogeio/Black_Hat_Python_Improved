@@ -7,12 +7,16 @@ import threading
 import time
 
 #? Need to know concepts
-#?  context manager
+#?  Context manager
+#?  Threading
+#*  https://docs.python.org/3/library/threading.html?highlight=thread%20join#module-threading
+#?  Threading - https://www.youtube.com/watch?v=olYdb0DdGtM
+#?  Threading - https://www.youtube.com/watch?v=cdPZ1pJACMI
 
 #! Additional materal, how to hash all the files in a web directory 
 #! to make sure they haven't been altered
 
-FILTERED = ['.jgp', '.gif', '.png', '.css']
+FILTERED = ['.jgp', '.gif', '.png', '.css', '.scss']
 TARGET = 'http://localhost/wordpress'
 THREADS = 10
 
@@ -49,7 +53,7 @@ def gather_paths():
                 #? databases in an offensive situation
                 continue
             path = os.path.join(dirpaths, fname)
-            # print(path)
+            print(path)
             #! This can be very nice to track changes to files on web servers
             #? print(type(path)) is type string
             if path.startswith('.'):
@@ -113,5 +117,32 @@ def test_remote():
 
 
 def run():
+    #? This function will spawn all of the threads and then finish with
+    #? all of the threads complete
+    mythreads = list()
+    for thread in range(THREADS):
+        #* https://docs.python.org/3/library/stdtypes.html?highlight=range#range
+        print(f'Spawning thread: {thread}')
+        target = threading.Thread(target=test_remote)
+        mythreads.append(target)
+        target.start()
 
-    pass
+    for thread in mythreads:
+        thread.join()
+        #* https://docs.python.org/3/library/threading.html?highlight=thread%20join#threading.Thread.join
+        #? when you use the .join() method you are waiting for the thread to finishing before moving onto 
+        #? the next piece of code (it's sort of like awate in JavaScript)
+
+
+if __name__ == "__main__":
+    with chdir('/home/saiello/Documents/agogeio/Black_Hat_Python_Improved/Chapter5-WebHackery/mapper_files/wordpress'):
+        gather_paths()
+    input('Press return to continue.')
+
+    run()
+
+    with open('answers.txt', 'w') as file:
+        while not answers.empty():
+            file.write(f'{answers.get()}\n')
+        print('done')
+

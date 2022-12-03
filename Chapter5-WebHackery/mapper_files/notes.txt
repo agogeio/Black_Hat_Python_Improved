@@ -1,0 +1,1 @@
+Extract wordpress into a subdirectory here
