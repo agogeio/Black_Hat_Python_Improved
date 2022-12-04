@@ -1,0 +1,3 @@
+Need a website that's running Wordpress
+Install the "requests" package via PIP
+Setup a free wordpress site on wordpress.com with the lab@agoge.io

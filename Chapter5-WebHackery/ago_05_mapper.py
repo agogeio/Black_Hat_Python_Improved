@@ -1,10 +1,13 @@
 import contextlib
 import os
 import queue
-import requests
+import requests     #had to pip install requests on a fresh build
 import sys
 import threading
 import time
+
+#! sudo apt install python3-pip
+#! pip install requests
 
 #? Need to know concepts
 #?  Context manager
@@ -17,8 +20,9 @@ import time
 #! to make sure they haven't been altered
 
 FILTERED = ['.jgp', '.gif', '.png', '.css', '.scss']
-TARGET = 'http://localhost/wordpress'
+TARGET = 'http://smack78.wordpress.com'
 THREADS = 10
+WORDPRESS_DIR = '/home/saiello/Documents/agogeio/Black_Hat_Python_Improved/Chapter5-WebHackery/mapper_files/wordpress'
 
 answers = queue.Queue()
 web_paths = queue.Queue()
@@ -64,11 +68,11 @@ def gather_paths():
                 path = path[1:] #? stripping the '.' off current directory
 
                 #? This will remove git files
-                #! if path.startswith('/.git') or path.startswith('.git'):
-                #!     path = path[1:]
-                #! else:
-                #!     print(path)
-                #!     web_paths.put(path)
+                if path.startswith('/.git') or path.startswith('.git'):
+                    path = path[1:]
+                else:
+                    print(path)
+                    web_paths.put(path)
 
 
 @contextlib.contextmanager
@@ -109,11 +113,10 @@ def test_remote():
 
         if response.status_code == 200:
             answers.put(url)
-            sys.stdout.write('+')
+            sys.stdout.write('+ ')
         else:
-            sys.stdout.write('x')
+            sys.stdout.write('x ')
         sys.stdout.flush()
-
 
 
 def run():
@@ -135,7 +138,7 @@ def run():
 
 
 if __name__ == "__main__":
-    with chdir('/home/saiello/Documents/agogeio/Black_Hat_Python_Improved/Chapter5-WebHackery/mapper_files/wordpress'):
+    with chdir(WORDPRESS_DIR):
         gather_paths()
     input('Press return to continue.')
 
@@ -145,4 +148,3 @@ if __name__ == "__main__":
         while not answers.empty():
             file.write(f'{answers.get()}\n')
         print('done')
-
