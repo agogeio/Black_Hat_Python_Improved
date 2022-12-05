@@ -1,0 +1,12 @@
+admin
+backup
+wp-admin
+db_conn
+db_connection
+dbconfig
+dbconfig.
+administrator
+portal
+login
+conf
+config
