@@ -11,7 +11,7 @@ WP_LOGIN = 'http://wordpress.agoge.io/wp-login.php/'
 WP_ADMIN = 'http://wordpress.agoge.io/wp-admin/'
 THREAD_COUNT = 10
 
-#! This file was written from scrath, I ran into to many issues with the 
+#! This file was written from scratch, I ran into to many issues with the 
 #! books code.  It was faster to start over. 
 
 def get_passwords():
