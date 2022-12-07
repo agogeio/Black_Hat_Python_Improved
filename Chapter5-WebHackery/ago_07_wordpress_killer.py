@@ -1,5 +1,6 @@
 from queue import Queue
 
+import asyncio
 import requests
 import threading
 
@@ -66,6 +67,13 @@ class wp_brute:
             self.threads_list.append(thread)
             thread.start()
 
+
+        # async with asyncio.TaskGroup() as tg:
+        #     task = tg.create_task(self.wp_auth(username=username, password_queue=password_queue))
+        #     await print(task)
+        # print('Async finished')
+            
+
     def check_status(self):
     #? Still trying to check the status to print out a message if there's no login
         for t in self.threads_list:
@@ -78,4 +86,4 @@ if __name__ == '__main__':
     password_queue = get_passwords()
     wpb = wp_brute()
     wpb.run_wp_bruteforce(username='python', password_queue=password_queue)
-    wpb.check_status()
+    # wpb.check_status()
