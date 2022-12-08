@@ -19,6 +19,7 @@ from datetime import datetime
 #? Read for Contents, Metadata, Pull requests
 
 PATH = os.getcwd()+'/Chapter7-GitHubC2/'
+print(f'os.getcwd: {os.getcwd()}')
 
 def github_connect():
 
@@ -113,7 +114,7 @@ class Trojan:
         remote_path = f'data/{message}.data'
         # print(f'Remote Path: {remote_path}')
         bindata = bytes('%r' % data, 'utf-8')
-        print(bindata)
+        # print(bindata)
 
         try:
             # self.repo.create_file(remote_path, message, bindata)
