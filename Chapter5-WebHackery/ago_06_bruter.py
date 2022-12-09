@@ -2,6 +2,7 @@ import queue
 import requests
 import sys
 import threading
+#? use the lscpu command in Linux to identify how many threads on a system
 
 #! With a real long word list the, script will not provide any meaningful output
 #! Recommend starting with a smaller wordlist 

@@ -4,6 +4,8 @@ import queue
 import requests     #had to pip install requests on a fresh build
 import sys
 import threading
+#? use the lscpu command in Linux to identify how many threads on a system
+#? https://realpython.com/intro-to-python-threading/
 import time
 
 #! sudo apt install python3-pip

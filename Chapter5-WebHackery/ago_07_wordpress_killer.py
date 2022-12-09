@@ -3,6 +3,7 @@ from queue import Queue
 import asyncio
 import requests
 import threading
+#? use the lscpu command in Linux to identify how many threads on a system
 
 
 TARGET = 'http://wordpress.agoge.io/wp-login.php'
