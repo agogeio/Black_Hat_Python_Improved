@@ -20,5 +20,4 @@ import pyWinhook
 
 import sys
 import time
-
 import win32clipboard
