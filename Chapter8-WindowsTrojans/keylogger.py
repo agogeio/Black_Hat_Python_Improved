@@ -1,6 +1,9 @@
 from ctypes import byref, create_string_buffer, c_ulong, windll
 from io import StringIO
 
+#! ctypes - a foreign function library for Python
+#* https://docs.python.org/3/library/ctypes.html
+
 #! Who is is Tim Golden?
 #! Core Pyton developer
 # import os
@@ -13,7 +16,8 @@ import pyWinhook
 #* https://zwbetz.com/how-to-add-a-binary-to-your-path-on-macos-linux-windows/
 #? Also need C++ 14.0 or greater
 #* https://visualstudio.microsoft.com/visual-cpp-build-tools/
-#* Hah to rename the path do there were no '.' or '-'
+#? Have to rename the directory path so there were no '.' or '-' in order for it to 
+#? work in the systems environment variable PATH
 import sys
 import time
 import win32clipboard
